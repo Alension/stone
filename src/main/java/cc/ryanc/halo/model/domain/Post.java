@@ -75,6 +75,12 @@ public class Post implements Serializable {
     private String postSummary;
 
     /**
+     * 首页是否显示
+     */
+    @Column(columnDefinition = "bit default 0")
+    private boolean swiperView;
+
+    /**
      * 文章所属分类
      */
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)

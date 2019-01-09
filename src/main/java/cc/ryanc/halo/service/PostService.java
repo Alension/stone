@@ -295,4 +295,6 @@ public interface PostService {
      * @return List
      */
     List<Post> getRecentPosts(int limit);
+
+    List<Post> getSwiperPosts();
 }

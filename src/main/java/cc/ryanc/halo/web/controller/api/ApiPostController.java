@@ -9,6 +9,7 @@ import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
 import cc.ryanc.halo.service.PostService;
 import cn.hutool.core.util.StrUtil;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,68 +35,7 @@ public class ApiPostController {
 
     /**
      * 获取文章列表 分页
-     *
-     * <p>
-     * result api
-     * <pre>
-     * {
-     *     "code": 200,
-     *     "msg": "OK",
-     *     "result": {
-     *         "content": [
-     *             {
-     *                 "postId": ,
-     *                 "user": {},
-     *                 "postTitle": "",
-     *                 "postType": "",
-     *                 "postContentMd": "",
-     *                 "postContent": "",
-     *                 "postUrl": "",
-     *                 "postSummary": "",
-     *                 "categories": [],
-     *                 "tags": [],
-     *                 "comments": [],
-     *                 "postThumbnail": "",
-     *                 "postDate": "",
-     *                 "postUpdate": "",
-     *                 "postStatus": 0,
-     *                 "postViews": 0,
-     *                 "allowComment": 1,
-     *                 "customTpl": ""
-     *             }
-     *         ],
-     *         "pageable": {
-     *             "sort": {
-     *                 "sorted": true,
-     *                 "unsorted": false,
-     *                 "empty": false
-     *             },
-     *             "offset": 0,
-     *             "pageSize": 10,
-     *             "pageNumber": 0,
-     *             "unpaged": false,
-     *             "paged": true
-     *         },
-     *         "last": true,
-     *         "totalElements": 1,
-     *         "totalPages": 1,
-     *         "size": 10,
-     *         "number": 0,
-     *         "first": true,
-     *         "numberOfElements": 1,
-     *         "sort": {
-     *             "sorted": true,
-     *             "unsorted": false,
-     *             "empty": false
-     *         },
-     *         "empty": false
-     *     }
-     * }
-     *     </pre>
-     * </p>
-     *
      * @param page 页码
-     *
      * @return JsonResult
      */
     @GetMapping(value = "/page/{page}")
@@ -115,39 +55,7 @@ public class ApiPostController {
 
     /**
      * 获取单个文章信息
-     *
-     * <p>
-     * result json:
-     * <pre>
-     * {
-     *     "code": 200,
-     *     "msg": "OK",
-     *     "result": {
-     *         "postId": ,
-     *         "user": {},
-     *         "postTitle": "",
-     *         "postType": "",
-     *         "postContentMd": "",
-     *         "postContent": "",
-     *         "postUrl": "",
-     *         "postSummary": "",
-     *         "categories": [],
-     *         "tags": [],
-     *         "comments": [],
-     *         "postThumbnail": "",
-     *         "postDate": "",
-     *         "postUpdate": "",
-     *         "postStatus": 0,
-     *         "postViews": 0,
-     *         "allowComment": 1,
-     *         "customTpl": ""
-     *     }
-     * }
-     *     </pre>
-     * </p>
-     *
      * @param postId 文章编号
-     *
      * @return JsonResult
      */
     @GetMapping(value = "/{postId}")
@@ -155,6 +63,20 @@ public class ApiPostController {
         final Post post = postService.findByPostId(postId, PostTypeEnum.POST_TYPE_POST.getDesc());
         if (null != post) {
             postService.cacheViews(post.getPostId());
+            return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), post);
+        } else {
+            return new JsonResult(ResponseStatusEnum.NOTFOUND.getCode(), ResponseStatusEnum.NOTFOUND.getMsg());
+        }
+    }
+
+    /**
+     * 获取轮播图文章
+     * @return JsonResult
+     */
+    @GetMapping(value = "/swiper")
+    public JsonResult swiperPosts() {
+        final List<Post> post = postService.getSwiperPosts();
+        if (null != post) {
             return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), post);
         } else {
             return new JsonResult(ResponseStatusEnum.NOTFOUND.getCode(), ResponseStatusEnum.NOTFOUND.getMsg());

@@ -351,7 +351,6 @@ public class PostServiceImpl implements PostService {
      * 根据分类目录查询文章
      *
      * @param category category
-     * @param status   status
      * @param pageable pageable
      * @return Page
      */
@@ -365,7 +364,6 @@ public class PostServiceImpl implements PostService {
      * 根据标签查询文章，分页
      *
      * @param tag      tag
-     * @param status   status
      * @param pageable pageable
      * @return Page
      */
@@ -516,5 +514,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getRecentPosts(int limit) {
         return postRepository.getPostsByLimit(limit);
+    }
+
+    @Override
+    public List<Post> getSwiperPosts() {
+        return postRepository.findPostsBySwiperView(true);
     }
 }

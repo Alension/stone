@@ -1,6 +1,7 @@
 package cc.ryanc.halo.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Column;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -85,4 +86,15 @@ public class User implements Serializable {
      */
     @JsonIgnore
     private Integer loginError = 0;
+
+    /**
+     * 用户角色
+     */
+    private int userRole;
+
+    /**
+     * 微信小程序openid
+     */
+    @Column(unique = true)
+    private String openid;
 }

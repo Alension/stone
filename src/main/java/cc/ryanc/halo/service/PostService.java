@@ -4,6 +4,7 @@ import cc.ryanc.halo.model.domain.Category;
 import cc.ryanc.halo.model.domain.Post;
 import cc.ryanc.halo.model.domain.Tag;
 import cc.ryanc.halo.model.dto.Archive;
+import cc.ryanc.halo.model.request.LikeR;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,7 +66,7 @@ public interface PostService {
     /**
      * 模糊查询文章
      *
-     * @param keyWord  keyword
+     * @param keyWord keyword
      * @param pageable pageable
      * @return List
      */
@@ -74,7 +75,7 @@ public interface PostService {
     /**
      * 根据文章状态查询 分页，用于后台管理
      *
-     * @param status   0，1，2
+     * @param status 0，1，2
      * @param postType post or page
      * @param pageable 分页信息
      * @return Page
@@ -92,7 +93,7 @@ public interface PostService {
     /**
      * 根据文章状态查询
      *
-     * @param status   0，1，2
+     * @param status 0，1，2
      * @param postType post or page
      * @return List
      */
@@ -109,7 +110,7 @@ public interface PostService {
     /**
      * 根据编号和类型查询文章
      *
-     * @param postId   postId
+     * @param postId postId
      * @param postType postType
      * @return Post
      */
@@ -118,7 +119,7 @@ public interface PostService {
     /**
      * 根据文章路径查询
      *
-     * @param postUrl  路径
+     * @param postUrl 路径
      * @param postType post or page
      * @return Post
      */
@@ -162,11 +163,11 @@ public interface PostService {
     List<Archive> findPostGroupByYear();
 
     /**
+     * @return List
      * @Author Aquan
      * @Description 查询归档信息 查看所有文章
      * @Date 2019.1.4 11:14
      * @Param
-     * @return List
      **/
     List<Archive> findAllPost();
 
@@ -174,7 +175,7 @@ public interface PostService {
     /**
      * 根据年份和月份查询文章
      *
-     * @param year  year
+     * @param year year
      * @param month month
      * @return List
      */
@@ -183,8 +184,8 @@ public interface PostService {
     /**
      * 根据年份和月份查询文章 分页
      *
-     * @param year     year
-     * @param month    month
+     * @param year year
+     * @param month month
      * @param pageable pageable
      * @return Page
      */
@@ -210,7 +211,7 @@ public interface PostService {
     /**
      * 根据标签查询文章
      *
-     * @param tag      tag
+     * @param tag tag
      * @param pageable pageable
      * @return Page
      */
@@ -219,7 +220,7 @@ public interface PostService {
     /**
      * 搜索文章
      *
-     * @param keyword  关键词
+     * @param keyword 关键词
      * @param pageable 分页信息
      * @return Page
      */
@@ -281,12 +282,13 @@ public interface PostService {
     /**
      * 组装分类目录和标签
      *
-     * @param post     post
+     * @param post post
      * @param cateList cateList
-     * @param tagList  tagList
+     * @param tagList tagList
      * @return Post Post
      */
-    Post buildCategoriesAndTags(Post post, List<String> cateList, @RequestParam("tagList") String tagList);
+    Post buildCategoriesAndTags(Post post, List<String> cateList,
+            @RequestParam("tagList") String tagList);
 
     /**
      * 获取最近的文章
@@ -297,4 +299,6 @@ public interface PostService {
     List<Post> getRecentPosts(int limit);
 
     List<Post> getSwiperPosts();
+
+    void likePost(LikeR likeR);
 }

@@ -77,4 +77,21 @@ public class CommentUtil {
         }
         return commentsChild;
     }
+
+   public static List<Comment> only2Top(List<Comment> comments){
+        comments.forEach(comment -> {
+            List<Comment> allChild = new ArrayList<>();
+            getAllChildComments(comment,allChild);
+            comment.setChildComments(allChild);
+        });
+        return comments;
+    }
+
+    private static void getAllChildComments(Comment comment,List<Comment> allChild) {
+        final List<Comment> childComments = comment.getChildComments();
+        if (!CollectionUtils.isEmpty(childComments)){
+            allChild.addAll(childComments);
+            childComments.forEach(cc-> getAllChildComments(cc,allChild));
+        }
+    }
 }

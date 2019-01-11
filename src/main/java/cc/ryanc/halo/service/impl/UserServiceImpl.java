@@ -169,11 +169,11 @@ public class UserServiceImpl implements UserService {
                 user.setUserName(userR.getUserName());
                 user.setUserAvatar(userR.getAvatarUrl());
                 user.setUserRole(0);
-                userRepository.save(user);
+                user = userRepository.save(user);
             }
 
             return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(),
-                    openid);
+                    user);
         }
         return new JsonResult(ResponseStatusEnum.ERROR.getCode(), ResponseStatusEnum.ERROR.getMsg());
     }

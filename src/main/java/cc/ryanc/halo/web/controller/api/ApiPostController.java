@@ -1,13 +1,18 @@
 package cc.ryanc.halo.web.controller.api;
 
+import cc.ryanc.halo.model.domain.Comment;
 import cc.ryanc.halo.model.domain.Post;
 import cc.ryanc.halo.model.dto.HaloConst;
 import cc.ryanc.halo.model.dto.JsonResult;
+import cc.ryanc.halo.model.dto.ListPage;
 import cc.ryanc.halo.model.enums.BlogPropertiesEnum;
 import cc.ryanc.halo.model.enums.PostStatusEnum;
 import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
+import cc.ryanc.halo.model.request.LikeR;
+import cc.ryanc.halo.model.request.UserR;
 import cc.ryanc.halo.service.PostService;
+import cc.ryanc.halo.utils.CommentUtil;
 import cn.hutool.core.util.StrUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,12 +66,10 @@ public class ApiPostController {
     @GetMapping(value = "/{postId}")
     public JsonResult posts(@PathVariable(value = "postId") Long postId) {
         final Post post = postService.findByPostId(postId, PostTypeEnum.POST_TYPE_POST.getDesc());
-        if (null != post) {
-            postService.cacheViews(post.getPostId());
-            return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), post);
-        } else {
-            return new JsonResult(ResponseStatusEnum.NOTFOUND.getCode(), ResponseStatusEnum.NOTFOUND.getMsg());
-        }
+        final ListPage<Comment> commentsPage = new ListPage<>(CommentUtil.getComments(post.getComments()), 1, 10);
+        post.setComments(CommentUtil.only2Top(commentsPage.getData()));
+        postService.cacheViews(post.getPostId());
+        return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), post);
     }
 
     /**
@@ -82,4 +85,11 @@ public class ApiPostController {
             return new JsonResult(ResponseStatusEnum.NOTFOUND.getCode(), ResponseStatusEnum.NOTFOUND.getMsg());
         }
     }
+
+    @PostMapping(value = "/like")
+    public JsonResult likePost(@RequestBody LikeR likeR) {
+        postService.likePost(likeR);
+        return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg());
+    }
+
 }

@@ -99,6 +99,15 @@ public class Post implements Serializable {
     private List<Tag> tags = new ArrayList<>();
 
     /**
+     * 点赞的用户
+     */
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "halo_posts_likes",
+            joinColumns = {@JoinColumn(name = "post_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false)})
+    private List<User> likeUsers = new ArrayList<>();
+
+    /**
      * 文章的评论
      */
     @OneToMany(mappedBy = "post", cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)

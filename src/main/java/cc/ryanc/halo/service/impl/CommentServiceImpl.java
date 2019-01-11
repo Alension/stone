@@ -2,8 +2,11 @@ package cc.ryanc.halo.service.impl;
 
 import cc.ryanc.halo.model.domain.Comment;
 import cc.ryanc.halo.model.domain.Post;
+import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.repository.CommentRepository;
+import cc.ryanc.halo.repository.PostRepository;
 import cc.ryanc.halo.service.CommentService;
+import cc.ryanc.halo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -32,6 +35,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private PostService postService;
 
     /**
      * 新增评论
@@ -121,12 +127,13 @@ public class CommentServiceImpl implements CommentService {
     /**
      * 根据文章查询评论
      *
-     * @param post     post
+     * @param postId    postId
      * @param pageable pageable
      * @return Page
      */
     @Override
-    public Page<Comment> findCommentsByPost(Post post, Pageable pageable) {
+    public Page<Comment> findCommentsByPost(Long postId, Pageable pageable) {
+        final Post post = postService.findByPostId(postId, PostTypeEnum.POST_TYPE_POST.getDesc());
         return commentRepository.findCommentsByPost(post, pageable);
     }
 
@@ -208,5 +215,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getRecentComments(int limit) {
         return commentRepository.getCommentsByLimit(limit);
+    }
+
+    @Override
+    public List<Comment> findCommentsByPostAndCommentStatus(Long postId, Integer status) {
+        final Optional<Post> optional = postService.findByPostId(postId);
+        return commentRepository.findCommentsByPostAndCommentStatus(optional.orElseThrow(NullPointerException::new),status);
     }
 }

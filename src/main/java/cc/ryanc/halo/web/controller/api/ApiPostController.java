@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/posts")
+@RequestMapping(value = "/api/post")
 public class ApiPostController {
 
     @Autowired
@@ -67,7 +67,7 @@ public class ApiPostController {
     public JsonResult posts(@PathVariable(value = "postId") Long postId) {
         final Post post = postService.findByPostId(postId, PostTypeEnum.POST_TYPE_POST.getDesc());
         final ListPage<Comment> commentsPage = new ListPage<>(CommentUtil.getComments(post.getComments()), 1, 10);
-        post.setComments(CommentUtil.only2Top(commentsPage.getData()));
+        post.setComments(commentsPage.getData());
         postService.cacheViews(post.getPostId());
         return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), post);
     }

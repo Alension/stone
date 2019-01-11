@@ -77,11 +77,11 @@ public interface CommentService {
     /**
      * 根据文章查询评论
      *
-     * @param post     post
+     * @param postId     postId
      * @param pageable pageable
      * @return Page
      */
-    Page<Comment> findCommentsByPost(Post post, Pageable pageable);
+    Page<Comment> findCommentsByPost(Long postId, Pageable pageable);
 
     /**
      * 根据文章和评论状态查询评论 分页
@@ -140,4 +140,13 @@ public interface CommentService {
      * @return List
      */
     List<Comment> getRecentComments(int limit);
+
+    /**
+     * 根据文章查询评论
+     *
+     * @param postId     文章id
+     * @param status    评论状态
+     * @return Page
+     */
+    List<Comment> findCommentsByPostAndCommentStatus(Long postId,Integer status);
 }

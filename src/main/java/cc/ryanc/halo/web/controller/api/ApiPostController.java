@@ -1,11 +1,14 @@
 package cc.ryanc.halo.web.controller.api;
 
+import static java.util.stream.Collectors.toList;
+
 import cc.ryanc.halo.model.domain.Comment;
 import cc.ryanc.halo.model.domain.Post;
 import cc.ryanc.halo.model.dto.HaloConst;
 import cc.ryanc.halo.model.dto.JsonResult;
 import cc.ryanc.halo.model.dto.ListPage;
 import cc.ryanc.halo.model.enums.BlogPropertiesEnum;
+import cc.ryanc.halo.model.enums.CommentStatusEnum;
 import cc.ryanc.halo.model.enums.PostStatusEnum;
 import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
@@ -66,8 +69,6 @@ public class ApiPostController {
     @GetMapping(value = "/{postId}")
     public JsonResult posts(@PathVariable(value = "postId") Long postId) {
         final Post post = postService.findByPostId(postId, PostTypeEnum.POST_TYPE_POST.getDesc());
-        final ListPage<Comment> commentsPage = new ListPage<>(CommentUtil.getComments(post.getComments()), 1, 10);
-        post.setComments(commentsPage.getData());
         postService.cacheViews(post.getPostId());
         return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), post);
     }

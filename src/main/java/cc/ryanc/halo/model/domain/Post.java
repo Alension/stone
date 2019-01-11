@@ -1,7 +1,9 @@
 package cc.ryanc.halo.model.domain;
 
+import cc.ryanc.halo.model.enums.CommentStatusEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Objects;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -158,5 +160,15 @@ public class Post implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     public Date getPostUpdate() {
         return postUpdate;
+    }
+
+    @Transient
+    private int commentCount;
+
+    @PostLoad
+    private void onLoad() {
+        this.commentCount = (int) (this.getComments().stream().filter(c -> c.getCommentParent() == 0L && Objects
+                .equals(c
+                        .getCommentStatus(), CommentStatusEnum.PUBLISHED.getCode())).count());
     }
 }

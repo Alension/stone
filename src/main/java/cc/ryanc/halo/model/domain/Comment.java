@@ -1,6 +1,7 @@
 package cc.ryanc.halo.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -56,7 +57,7 @@ public class Comment implements Serializable {
     /**
      * 评论人的主页
      */
-    private String commentAuthorUrl;
+    private String commentAuthorUrl="";
 
     /**
      * 评论人的ip
@@ -82,6 +83,12 @@ public class Comment implements Serializable {
     private String commentContent;
 
     /**
+     * 评论内容文本格式
+     */
+    @Lob
+    private String commentContentText;
+
+    /**
      * 评论者ua信息
      */
     @Column(length = 512)
@@ -100,11 +107,18 @@ public class Comment implements Serializable {
     /**
      * 是否是博主的评论 0:不是 1:是
      */
-    private Integer isAdmin;
+    private Integer isAdmin = 0;
 
     /**
      * 当前评论下的所有子评论
      */
     @Transient
     private List<Comment> childComments;
+
+    /**
+     * 评论的用户
+     */
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

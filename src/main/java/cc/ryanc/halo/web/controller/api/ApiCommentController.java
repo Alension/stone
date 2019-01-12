@@ -9,6 +9,7 @@ import cc.ryanc.halo.model.dto.ListPage;
 import cc.ryanc.halo.model.enums.CommentStatusEnum;
 import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
+import cc.ryanc.halo.model.request.CommentR;
 import cc.ryanc.halo.service.CommentService;
 import cc.ryanc.halo.utils.CommentUtil;
 import java.util.List;
@@ -18,6 +19,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,5 +48,11 @@ public class ApiCommentController {
                 CommentStatusEnum.PUBLISHED.getCode());
         comments = CommentUtil.getComments(comments).stream().skip((page - 1) * size).limit(size).collect(toList());
         return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(), comments);
+    }
+
+    @PostMapping("/")
+    public JsonResult insert(@RequestBody CommentR commentR) {
+        commentService.inset(commentR);
+        return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg());
     }
 }

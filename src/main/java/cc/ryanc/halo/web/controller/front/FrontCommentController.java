@@ -128,6 +128,7 @@ public class FrontCommentController {
             if (StrUtil.isNotBlank(comment.getCommentAuthorEmail())) {
                 comment.setCommentAuthorAvatarMd5(SecureUtil.md5(comment.getCommentAuthorEmail()));
             }
+            comment.setCommentContentText(comment.getCommentContent());
             if (comment.getCommentParent() > 0) {
                 lastComment = commentService.findCommentById(comment.getCommentParent()).orElse(new Comment());
                 final StrBuilder buildContent = new StrBuilder("<a href='#comment-id-");

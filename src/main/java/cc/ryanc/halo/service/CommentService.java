@@ -2,6 +2,7 @@ package cc.ryanc.halo.service;
 
 import cc.ryanc.halo.model.domain.Comment;
 import cc.ryanc.halo.model.domain.Post;
+import cc.ryanc.halo.model.request.CommentR;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -149,4 +150,6 @@ public interface CommentService {
      * @return Page
      */
     List<Comment> findCommentsByPostAndCommentStatus(Long postId,Integer status);
+
+    void inset(CommentR commentR);
 }

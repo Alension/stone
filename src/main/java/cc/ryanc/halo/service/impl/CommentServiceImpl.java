@@ -2,11 +2,17 @@ package cc.ryanc.halo.service.impl;
 
 import cc.ryanc.halo.model.domain.Comment;
 import cc.ryanc.halo.model.domain.Post;
+import cc.ryanc.halo.model.domain.User;
+import cc.ryanc.halo.model.enums.CommentStatusEnum;
+import cc.ryanc.halo.model.enums.PostStatusEnum;
 import cc.ryanc.halo.model.enums.PostTypeEnum;
+import cc.ryanc.halo.model.request.CommentR;
 import cc.ryanc.halo.repository.CommentRepository;
 import cc.ryanc.halo.repository.PostRepository;
+import cc.ryanc.halo.repository.UserRepository;
 import cc.ryanc.halo.service.CommentService;
 import cc.ryanc.halo.service.PostService;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -38,6 +44,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
 
     /**
      * 新增评论
@@ -222,4 +235,24 @@ public class CommentServiceImpl implements CommentService {
         final Optional<Post> optional = postService.findByPostId(postId);
         return commentRepository.findCommentsByPostAndCommentStatus(optional.orElseThrow(NullPointerException::new),status);
     }
+
+    @Override
+    public void inset(CommentR commentR) {
+        final User user = userRepository.findByOpenid(commentR.getOpenid());
+        final Post post = postRepository
+                .findPostByPostIdAndPostType(commentR.getPostId(),
+                        PostTypeEnum.POST_TYPE_POST.getDesc());
+        Comment comment = new Comment();
+        comment.setUser(user);
+        comment.setCommentAuthor(user.getUserName());
+        comment.setCommentContent(commentR.getContent());
+        comment.setCommentContentText(commentR.getContent());
+        comment.setCommentDate(new Date());
+        comment.setCommentParent(commentR.getParent());
+        comment.setCommentStatus(CommentStatusEnum.PUBLISHED.getCode());
+        comment.setPost(post);
+        commentRepository.save(comment);
+    }
+
+
 }

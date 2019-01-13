@@ -1,7 +1,9 @@
 package cc.ryanc.halo.model.domain;
 
+import cc.ryanc.halo.model.enums.CommentStatusEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Objects;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -75,6 +77,12 @@ public class Post implements Serializable {
     private String postSummary;
 
     /**
+     * 首页是否显示
+     */
+    @Column(columnDefinition = "bit default 0")
+    private boolean swiperView;
+
+    /**
      * 文章所属分类
      */
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
@@ -91,6 +99,15 @@ public class Post implements Serializable {
             joinColumns = {@JoinColumn(name = "post_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", nullable = false)})
     private List<Tag> tags = new ArrayList<>();
+
+    /**
+     * 点赞的用户
+     */
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(name = "halo_posts_likes",
+            joinColumns = {@JoinColumn(name = "post_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false)})
+    private List<User> likeUsers = new ArrayList<>();
 
     /**
      * 文章的评论
@@ -143,5 +160,15 @@ public class Post implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     public Date getPostUpdate() {
         return postUpdate;
+    }
+
+    @Transient
+    private int commentCount;
+
+    @PostLoad
+    private void onLoad() {
+        this.commentCount = (int) (this.getComments().stream().filter(c -> c.getCommentParent() == 0L && Objects
+                .equals(c
+                        .getCommentStatus(), CommentStatusEnum.PUBLISHED.getCode())).count());
     }
 }

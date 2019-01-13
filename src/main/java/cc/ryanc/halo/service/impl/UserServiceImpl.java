@@ -1,14 +1,23 @@
 package cc.ryanc.halo.service.impl;
 
 import cc.ryanc.halo.model.domain.User;
+import cc.ryanc.halo.model.dto.Code2SessionResp;
+import cc.ryanc.halo.model.dto.JsonResult;
+import cc.ryanc.halo.model.enums.ResponseStatusEnum;
 import cc.ryanc.halo.model.enums.TrueFalseEnum;
+import cc.ryanc.halo.model.request.UserR;
 import cc.ryanc.halo.repository.UserRepository;
 import cc.ryanc.halo.service.UserService;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * <pre>
@@ -137,5 +146,35 @@ public class UserServiceImpl implements UserService {
         user.setLoginLast(new Date());
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public JsonResult login(UserR userR) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx04a74b02846a8374&secret=a5869ecb19bb54673040bc8311a19d37&js_code="+userR.getJsCode()+"&grant_type=authorization_code";
+
+        final ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
+        if (HttpStatus.OK.equals(entity.getStatusCode())){
+            final String body = entity.getBody();
+            Gson gson = new Gson();
+            final Code2SessionResp resp = gson.fromJson(body, Code2SessionResp.class);
+
+            final String openid = resp.getOpenid();
+
+            User user = userRepository.findByOpenid(openid);
+            //没有用户记录则新建一个用户
+            if (user == null){
+                user = new User();
+                user.setOpenid(openid);
+                user.setUserName(userR.getUserName());
+                user.setUserAvatar(userR.getAvatarUrl());
+                user.setUserRole(0);
+                user = userRepository.save(user);
+            }
+
+            return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg(),
+                    user);
+        }
+        return new JsonResult(ResponseStatusEnum.ERROR.getCode(), ResponseStatusEnum.ERROR.getMsg());
     }
 }

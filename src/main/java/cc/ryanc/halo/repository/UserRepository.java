@@ -39,4 +39,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return User
      */
     User findByUserIdAndUserPass(Long userId, String userPass);
+
+
+    User findByOpenid(String openid);
 }

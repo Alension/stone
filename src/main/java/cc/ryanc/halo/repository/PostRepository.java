@@ -254,4 +254,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
      */
     @Query(value = "SELECT * FROM halo_post WHERE post_status = 0 AND post_type = 'post' ORDER BY post_date DESC LIMIT :limit",nativeQuery = true)
     List<Post> getPostsByLimit(@Param(value = "limit") int limit);
+
+    List<Post> findPostsBySwiperView(boolean swiperView);
 }

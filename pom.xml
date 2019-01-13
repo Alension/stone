@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cc.ryanc</groupId>
-	<artifactId>halo</artifactId>
+	<artifactId>halo2</artifactId>
 	<version>latest</version>
-	<name>halo</name>
+	<name>halo2</name>
 	<!-- 虽然Halo使用了宽松的GPL协议，但开发不易，希望您可以保留一下版权声明。笔芯~ -->
 	<description>
 		halo，一个基于SpringBoot的博客系统，最求轻快，易用，以内容为中心。

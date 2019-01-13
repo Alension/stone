@@ -60,6 +60,13 @@
                         </div>
                     </div>
                     <div class="box-body">
+                      <div class="form-group">
+                        <label for="swiperView" class="control-label">小程序首页轮播图是否显示</label>
+                        <select class="form-control" id="swiperView" name="swiperView">
+                          <option value="true" <#if post.swiperView == true>selected</#if>><@spring.message code='common.select.yes' /></option>
+                          <option value="false" <#if post.swiperView == false>selected</#if>><@spring.message code='common.select.no' /></option>
+                        </select>
+                      </div>
                         <div class="form-group">
                             <label for="allowComment" class="control-label"><@spring.message code='admin.editor.allow-comment' /></label>
                             <select class="form-control" id="allowComment" name="allowComment">
@@ -297,7 +304,8 @@
             'cateList' : cateList.toString(),
             'tagList' : $('#tagList').tagEditor('getTags')[0].tags.toString(),
             'allowComment' : $('#allowComment').val(),
-            'postDate' : $("#postDate").val()
+            'postDate' : $("#postDate").val(),
+            'swiperView':$("#swiperView").val()
         },function (data) {
             if(data.code === 1){
                 //清除自动保存的内容

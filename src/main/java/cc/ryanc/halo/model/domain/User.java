@@ -1,6 +1,11 @@
 package cc.ryanc.halo.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -85,4 +90,23 @@ public class User implements Serializable {
      */
     @JsonIgnore
     private Integer loginError = 0;
+
+    /**
+     * 用户角色
+     */
+    private int userRole;
+
+    /**
+     * 微信小程序openid
+     */
+    @Column(unique = true)
+    private String openid;
+
+    @ManyToMany(mappedBy = "likeUsers")
+    @JsonIgnore
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Comment> comments;
 }

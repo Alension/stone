@@ -2,6 +2,8 @@ package cc.ryanc.halo.service;
 
 import cc.ryanc.halo.model.domain.User;
 
+import cc.ryanc.halo.model.dto.JsonResult;
+import cc.ryanc.halo.model.request.UserR;
 import java.util.Date;
 
 /**
@@ -83,4 +85,6 @@ public interface UserService {
      * @return User
      */
     User updateUserNormal();
+
+    JsonResult login(UserR user);
 }

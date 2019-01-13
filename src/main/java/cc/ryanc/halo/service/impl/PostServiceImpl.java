@@ -3,11 +3,14 @@ package cc.ryanc.halo.service.impl;
 import cc.ryanc.halo.model.domain.Category;
 import cc.ryanc.halo.model.domain.Post;
 import cc.ryanc.halo.model.domain.Tag;
+import cc.ryanc.halo.model.domain.User;
 import cc.ryanc.halo.model.dto.Archive;
 import cc.ryanc.halo.model.dto.HaloConst;
 import cc.ryanc.halo.model.enums.PostStatusEnum;
 import cc.ryanc.halo.model.enums.PostTypeEnum;
+import cc.ryanc.halo.model.request.LikeR;
 import cc.ryanc.halo.repository.PostRepository;
+import cc.ryanc.halo.repository.UserRepository;
 import cc.ryanc.halo.service.CategoryService;
 import cc.ryanc.halo.service.PostService;
 import cc.ryanc.halo.service.TagService;
@@ -50,6 +53,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * 保存文章
@@ -193,7 +199,10 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     public Post findByPostId(Long postId, String postType) {
-        return postRepository.findPostByPostIdAndPostType(postId, postType);
+        final Post post = postRepository
+                .findPostByPostIdAndPostType(postId, postType);
+        post.setPostViews(post.getPostViews()+1);
+        return postRepository.save(post);
     }
 
     /**
@@ -351,7 +360,6 @@ public class PostServiceImpl implements PostService {
      * 根据分类目录查询文章
      *
      * @param category category
-     * @param status   status
      * @param pageable pageable
      * @return Page
      */
@@ -365,7 +373,6 @@ public class PostServiceImpl implements PostService {
      * 根据标签查询文章，分页
      *
      * @param tag      tag
-     * @param status   status
      * @param pageable pageable
      * @return Page
      */
@@ -516,5 +523,20 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getRecentPosts(int limit) {
         return postRepository.getPostsByLimit(limit);
+    }
+
+    @Override
+    public List<Post> getSwiperPosts() {
+        return postRepository.findPostsBySwiperView(true);
+    }
+
+    @Override
+    public void likePost(LikeR likeR) {
+        final Post post = findByPostId(likeR.getPostId()).orElseThrow(NullPointerException::new);
+        final User user = userRepository.findByOpenid(likeR.getOpenid());
+        final List<User> likeUsers = post.getLikeUsers();
+        likeUsers.add(user);
+        post.setLikeUsers(likeUsers);
+        postRepository.save(post);
     }
 }

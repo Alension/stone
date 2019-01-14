@@ -42,6 +42,11 @@
                                     <textarea class="form-control" rows="3" id="cateDesc" name="cateDesc" style="resize: none">${updateCategory.cateDesc!}</textarea>
                                     <small><@spring.message code='admin.categories.form.cate-desc-tips' /></small>
                                 </div>
+                              <div class="form-group">
+                                <label for="cateAppImgUrl" class="control-label">微信小程序图片url</label>
+                                <input type="text" class="form-control" id="cateAppImgUrl" name="cateAppImgUrl" value="${updateCategory.cateAppImgUrl!}">
+                                <small>微信小程序分类目录展示图片url地址</small>
+                              </div>
                             </div>
                             <div class="box-footer">
                                 <button type="button" class="btn btn-primary btn-sm" onclick="save()"><@spring.message code='common.btn.define-edit' /></button>
@@ -69,6 +74,11 @@
                                     <textarea class="form-control" rows="3" id="cateDesc" name="cateDesc" style="resize: none"></textarea>
                                     <small><@spring.message code='admin.categories.form.cate-desc-tips' /></small>
                                 </div>
+                              <div class="form-group">
+                                <label for="cateAppImgUrl" class="control-label">微信小程序图片url</label>
+                                <input type="text" class="form-control" id="cateAppImgUrl" name="cateAppImgUrl">
+                                <small>微信小程序分类目录展示图片url地址</small>
+                              </div>
                             </div>
                             <div class="box-footer">
                                 <button type="button" class="btn btn-primary btn-sm" onclick="save()"><@spring.message code='common.btn.define-add' /></button>
@@ -89,7 +99,7 @@
                                     <th><@spring.message code='common.th.name' /></th>
                                     <th><@spring.message code='common.th.url' /></th>
                                     <th><@spring.message code='common.th.desc' /></th>
-                                    <th><@spring.message code='common.th.posts-count' /></th>
+                                    <th>微信小程序图片url</th>
                                     <th><@spring.message code='common.th.control' /></th>
                                 </tr>
                                 <@commonTag method="categories">
@@ -99,6 +109,7 @@
                                                 <td>${cate.cateName!}</td>
                                                 <td>${cate.cateUrl!}</td>
                                                 <td>${cate.cateDesc!}</td>
+                                                <td>${cate.cateAppImgUrl!}</td>
                                                 <td>
                                                     <span class="label" style="background-color: #d6cdcd;">${cate.posts?size}</span>
                                                 </td>

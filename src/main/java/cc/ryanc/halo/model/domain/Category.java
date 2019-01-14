@@ -51,4 +51,9 @@ public class Category implements Serializable {
     @ManyToMany(mappedBy = "categories")
     @JsonIgnore
     private List<Post> posts = new ArrayList<>();
+
+    /**
+     * 微信小程序图片url
+     */
+    private String cateAppImgUrl;
 }

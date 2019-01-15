@@ -111,16 +111,6 @@
           <li><a data-pjax="true" href="/admin/tools"><i class="fa fa-circle-o"></i>小工具</a></li>
         </ul>
       </li>
-      <li class="treeview">
-        <a data-pjax="true" href="javascript:void(0)">
-          <i class="fa fa-cog"></i>
-          <span>小程序</span>
-          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a data-pjax="true" href="/admin/tools"><i class="fa fa-circle-o"></i>微信</a></li>
-        </ul>
-      </li>
     </ul>
   </section>
 </aside>

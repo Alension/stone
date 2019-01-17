@@ -3,11 +3,15 @@ package cc.ryanc.halo.service.impl;
 import cc.ryanc.halo.model.domain.User;
 import cc.ryanc.halo.model.dto.Code2SessionResp;
 import cc.ryanc.halo.model.dto.JsonResult;
+import cc.ryanc.halo.model.dto.Site;
 import cc.ryanc.halo.model.enums.BlogPropertiesEnum;
 import cc.ryanc.halo.model.enums.MiniProgramPropertiesEnum;
+import cc.ryanc.halo.model.enums.PostStatusEnum;
+import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
 import cc.ryanc.halo.model.enums.TrueFalseEnum;
 import cc.ryanc.halo.model.request.UserR;
+import cc.ryanc.halo.repository.PostRepository;
 import cc.ryanc.halo.repository.UserRepository;
 import cc.ryanc.halo.service.OptionsService;
 import cc.ryanc.halo.service.UserService;
@@ -39,6 +43,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private OptionsService optionsService;
 
+    @Autowired
+    private PostRepository postRepository;
     /**
      * 保存个人资料
      *
@@ -187,5 +193,22 @@ public class UserServiceImpl implements UserService {
                     user);
         }
         return new JsonResult(ResponseStatusEnum.ERROR.getCode(), ResponseStatusEnum.ERROR.getMsg());
+    }
+
+    @Override
+    public JsonResult getSiteInfo() {
+        final Integer publishPostNum = postRepository
+                .countAllByPostStatusAndPostType(PostStatusEnum.PUBLISHED.getCode(),
+                        PostTypeEnum.POST_TYPE_POST.getDesc());
+
+        final Long viewsSum = postRepository.getPostViewsSum();
+
+        final Long likesSum = postRepository.getPostLikesSum();
+
+        Site site =  new Site();
+        site.setPublishPostNum(publishPostNum);
+        site.setViewNum(viewsSum);
+        site.setLikeNum(likesSum);
+        return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(),site);
     }
 }

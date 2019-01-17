@@ -18,8 +18,8 @@
 
     <view class="topic-common-list" style="display:{{isCategoryPage}}">
       <view class="topic-list-item">
-        <!-- <image src="../../images/20181219114814.gif" class="cover">
-        </image> -->
+        <image src="{{categray.img}}" class="cover">
+        </image>
         <view class="topic-content-title">
           <text>{{categray.name}}</text>
         </view>
@@ -73,7 +73,7 @@
         </view>
 -->
 
-        <view class="no-more" hidden="{{!isLastPage}}">----------无更多文章...---------</view>
+        <view class="no-more" hidden="{{!isLastPage}}">----------这是一个有底线的博客---------</view>
 
       </view>
 

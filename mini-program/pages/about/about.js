@@ -10,7 +10,7 @@
  * 
  */
 
-var Api = require('../../utils/api/api.js');
+import Api from "../../utils/api/api";
 var util = require('../../utils/util.js');
 var WxParse = require('../../wxParse/wxParse.js');
 var wxApi = require('../../utils/wxApi.js')
@@ -22,6 +22,47 @@ var app = getApp();
 
 
 Page({
+
+    data:{
+        siteInfo:{},
+        apps: []
+    },
     
+    onLoad:function (option) {
+        const self = this;
+        const url = Api.userApi.siteInfo;
+        const siteInfoRequest = wxRequest.getRequest(url);
+        siteInfoRequest.then(response=>{
+            if (response.statusCode == 200) {
+                self.setData({
+                    siteInfo:response.data.result,
+                    apps: config.getApps
+                })
+            }
+        })
+        
+    },
+
+    redict: function (e) {
+        common.redict(e)
+    },
+
+    copyLink: function (e) {
+        //this.ShowHideMenu();
+        wx.setClipboardData({
+            data: e.target.dataset.url,
+            success: function (res) {
+                wx.getClipboardData({
+                    success: function (res) {
+                        wx.showToast({
+                            title: e.target.dataset.desc,
+                            image: '../../images/link.png',
+                            duration: 2000
+                        })
+                    }
+                })
+            }
+        })
+    },
   
 })

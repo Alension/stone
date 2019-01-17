@@ -35,8 +35,7 @@
   clear: both;
   /* border: 1px solid #ccc; *//* border-radius: 6px; */
   margin-bottom: 30rpx;
-  background: var(--main-color);
-  height: 320rpx
+
 }
 
 .topic-list-item  image.cover {
@@ -70,9 +69,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   position: absolute;
-  border-bottom: 1px solid #fff; 
+  border-bottom: 3px solid #fff; 
   z-index: 2;
-  left: 64rpx;
+  left: 60rpx;
   top: 180rpx;
 }
 

@@ -19,7 +19,6 @@ page{
 .about-top-img{
   width: 100%;
   height: 500rpx;
-  opacity: 0.8;
 }
 
 .about-avatar-img{
@@ -39,6 +38,7 @@ page{
 .info{
   margin-top: 200rpx;
   text-align: center;
+  padding:0 20rpx;
 }
 
 .birth{
@@ -94,4 +94,27 @@ page{
   display: inline-block;
   text-align: center;
   width: 20%;
+}
+
+.link{
+  text-align: left;
+  margin-top: 30rpx;
+  border-top: 1rpx solid #eee;
+  
+
+}
+
+.link-info{
+  height:45rpx;
+  margin:20rpx 0;
+}
+
+.line{
+  display: inline-block;
+  background-color: var(--main-color);
+  width: 20rpx;
+  height: 50rpx;
+  margin:0 20rpx 0 20rpx;
+  vertical-align: middle
+
 }

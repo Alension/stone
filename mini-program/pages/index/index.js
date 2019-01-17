@@ -80,6 +80,23 @@ Page({
             }
         }
     },
+    onPageScroll: function (e) {
+        const showNav = this.data.showNav
+        const self = this
+        if (showNav) {
+            if (e.scrollTop < 10) {
+                self.setData({
+                    showNav: false
+                })
+            }
+        } else {
+            if (e.scrollTop > 10) {
+                self.setData({
+                    showNav: true
+                })
+            }
+        }
+    },
     onPullDownRefresh: function () {
         var self = this;
         self.setData({

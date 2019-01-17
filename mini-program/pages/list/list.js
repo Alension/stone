@@ -141,7 +141,8 @@ Page({
         categray:{
           id: options.categoryID,
           name:options.name,
-          desc:options.desc
+          desc:options.desc,
+          img: options.img
         },
         isCategoryPage: "block"
       });
@@ -162,6 +163,23 @@ Page({
       })
 
       this.fetchPostsData(self.data);
+    }
+  },
+  onPageScroll: function (e) {
+    const showNav = this.data.showNav
+    const self = this
+    if (showNav) {
+      if (e.scrollTop < 10) {
+        self.setData({
+          showNav: false
+        })
+      }
+    } else {
+      if (e.scrollTop > 10) {
+        self.setData({
+          showNav: true
+        })
+      }
     }
   },
   //获取文章列表数据

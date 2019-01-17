@@ -220,17 +220,24 @@ font-weight: 500;
 }
 
 .swiper-item view{
-  position: absolute;
-  bottom: 10rpx;
-  width: 100rpx;
-  font-size: 30rpx;
-  margin: 0 auto;
-  text-align: center;
-  color: #ffffff;
-  background-color: var(--main-color);
-  border-radius: 10rpx;
-  left: 50%;
-  margin-left: -40rpx;
+  position:absolute;
+  width:100rpx;
+  font-size:40rpx;
+  margin:0 auto;
+  text-align:center;
+  color:#ffffff;
+  border-radius:10rpx;
+  left:50%;
+  margin-left:-40rpx;
+  height:100rpx;
+  border-radius:10rpx;
+  display:inline-block;
+  line-height:100rpx;
+  margin-top:50rpx;
+  font-weight:bold;
+
+  /* text-shadow: #4c4c4c 2rpx 2rpx 2rpx */
+
 }
 
 .slide-image{

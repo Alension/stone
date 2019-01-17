@@ -4,14 +4,14 @@ Component({
      * 组件的属性列表
      */
     properties: {
-
+       
     },
 
     /**
      * 组件的初始数据
      */
     data: {
-
+       
     },
 
     /**
@@ -21,6 +21,12 @@ Component({
         go_home:function () {
             wx.switchTab({
                 url: '/pages/index/index'
+            })
+        },
+        go_top:function () {
+            wx.pageScrollTo({
+                scrollTop: 0,
+                duration: 500
             })
         }
     }

@@ -19,7 +19,7 @@
     "window": {
         "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#4ed588",
-        "navigationBarTitleText": "羊毛多",
+        "navigationBarTitleText": "Alension",
         "navigationBarTextStyle": "white",
         "navigationStyle": "custom"
     },
@@ -31,19 +31,14 @@
         "list": [
             {
                 "pagePath": "pages/index/index",
-                "iconPath": "images/tar-home.png",
-                "selectedIconPath": "images/tar-home-on.png",
+                "iconPath": "images/tab-1.png",
+                "selectedIconPath": "images/tab-1-on.png",
                 "text": "首页"
             },
             {
-                "pagePath": "pages/readlog/readlog",
-                "iconPath": "images/tar-person.png",
-                "selectedIconPath": "images/tar-person-on.png",
-                "text": "我的"
-            },  {
                 "pagePath": "pages/about/about",
-                "iconPath": "images/tar-about.png",
-                "selectedIconPath": "images/tar-about-on.png",
+                "iconPath": "images/tab-2.png",
+                "selectedIconPath": "images/tab-2-on.png",
                 "text": "关于"
             }
 			

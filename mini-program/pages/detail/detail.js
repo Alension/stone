@@ -61,7 +61,6 @@ Page({
         likeCount: 0,
         displayLike: 'none',
         replayTemplateId: config.getReplayTemplateId,
-        userid: "",
         toFromId: "",
         commentdate: "",
         flag: 1,
@@ -71,7 +70,9 @@ Page({
         isLoginPopup: false,
         openid: "",
         userInfo: {},
-        system: ''
+        system: '',
+        scrollTop:0,
+        showNav:false
 
     },
     onLoad: function (options) {
@@ -88,6 +89,23 @@ Page({
         })
         new ModalView;
 
+    },
+    onPageScroll:function (e) {
+        const showNav = this.data.showNav
+        const self = this
+        if (showNav) {
+            if (e.scrollTop< 10){
+                self.setData({
+                    showNav: false
+                })
+            }
+        }else{
+            if (e.scrollTop > 10) {
+                self.setData({
+                    showNav: true
+                })
+            }
+        }
     },
     showLikeImg: function () {
         var self = this;
@@ -133,11 +151,6 @@ Page({
                 // 转发失败
             }
         }
-    },
-    navIndex: function () {
-        wx.switchTab({
-            url: '../index/index'
-        })
     },
     gotowebpage: function () {
         var self = this;
@@ -308,7 +321,7 @@ Page({
                     detailDate: result.postDate,
                     display: 'block',
                     displayLike: _displayLike,
-                    total_comments: result.comments.length
+                    total_comments: result.commentCount
 
                 });
                 return result;
@@ -489,8 +502,6 @@ Page({
         var self = this;
         var id = e.target.dataset.id;
         var name = e.target.dataset.name;
-        var userid = e.target.dataset.userid;
-        var toFromId = e.target.dataset.formid;
         var commentdate = e.target.dataset.commentdate;
         isFocusing = true;
         if (self.data.detail.allowComment == "1") {
@@ -498,8 +509,6 @@ Page({
                 parentID: id,
                 placeholder: "回复" + name + ":",
                 focus: true,
-                userid: userid,
-                toFromId: toFromId,
                 commentdate: commentdate
             });
 
@@ -517,8 +526,6 @@ Page({
                     self.setData({
                         parentID: "0",
                         placeholder: "评论...",
-                        userid: "",
-                        toFromId: "",
                         commentdate: ""
                     });
                 }
@@ -548,8 +555,6 @@ Page({
             formId = "";
 
         }
-        var userid = self.data.userid;
-        var toFromId = self.data.toFromId;
         var commentdate = self.data.commentdate;
         if (comment.length === 0) {
             self.setData({
@@ -576,56 +581,24 @@ Page({
                 postCommentRequest
                     .then(res => {
                         if (res.statusCode == 200) {
-                            if (res.data.status == '200') {
+                            if (res.data.code == '200') {
                                 self.setData({
                                     content: '',
                                     parentID: "0",
-                                    userid: 0,
                                     placeholder: "评论...",
                                     focus: false,
                                     commentsList: []
 
                                 });
-                                console.log(res.data.message);
-                                if (parent != "0" && !util.getDateOut(commentdate) && toFromId != "") {
-                                    var useropenid = res.data.useropenid;
-                                    var data =
-                                    {
-                                        openid: useropenid,
-                                        postid: postID,
-                                        template_id: self.data.replayTemplateId,
-                                        form_id: toFromId,
-                                        total_fee: comment,
-                                        fromUser: fromUser,
-                                        flag: 3,
-                                        parent: parent
-                                    };
-
-                                    url = Api.sendMessagesUrl();
-                                    var sendMessageRequest = wxRequest.postRequest(url, data);
-                                    sendMessageRequest.then(response => {
-                                        if (response.data.status == '200') {
-                                            console.log(response.data.message);
-                                            // wx.navigateBack({
-                                            //     delta: 1
-                                            // })
-
-                                        }
-                                        else {
-                                            console.log(response.data.message);
-
-                                        }
-
-                                    });
-
-                                }
+                                console.log(res.data.result);
+                               
                                 console.log(res.data.code);
-                                var commentCounts = parseInt(self.data.total_comments) + 1;
-                                self.setData({
-                                    total_comments: commentCounts,
-                                    commentCount: "有" + commentCounts + "条评论"
-
-                                });
+                                if (parent == 0) {
+                                    var commentCounts = parseInt(self.data.total_comments) + 1;
+                                    self.setData({
+                                        total_comments: commentCounts,
+                                    });
+                                }
                             }
                             else if (res.data.status == '500') {
                                 self.setData({

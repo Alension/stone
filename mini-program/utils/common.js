@@ -2,7 +2,7 @@
  * @Author: Alen 
  * @Date: 2018-12-20 11:55:12 
  * @Last Modified by: Alen
- * @Last Modified time: 2019-01-16 16:59:00
+ * @Last Modified time: 2019-01-17 23:04:54
  */
 
 
@@ -19,7 +19,8 @@ function redict(e) {
     {
         const name = e.currentTarget.dataset.name;
         const desc = e.currentTarget.dataset.desc;
-        var url = '../list/list?categoryID=' + id + '&name=' + name + '&desc=' +desc;
+        const img = e.currentTarget.dataset.img;
+        var url = '../list/list?categoryID=' + id + '&name=' + name + '&desc=' + desc + '&img=' + img;
         wx.navigateTo({
             url: url
         })

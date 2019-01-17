@@ -11,10 +11,11 @@
  */ -->
 <import src="../../templates/common-list.wxml" />
 <import src="../../templates/copyright.wxml" />
+<nav></nav>
 <view class="index-header" style="display:{{displaySwiper}}">
   <swiper class="index-swiper" indicator-dots="true" interval="10000" autoplay="true" indicator-color="rgba(255, 255, 255, .2)" indicator-active-color="rgba(255, 255, 255, .7)">
     <block wx:key="id" wx:for="{{postsShowSwiperList}}">
-      <swiper-item id="{{item.id}}" index="{{index}}" data-redicttype="{{item.type}}" data-appid="{{item.appid}}" data-url="{{item.url}}" bindtap="redictAppDetail">
+      <swiper-item id="{{item.postId}}" index="{{index}}" data-redicttype="{{item.type}}"  data-url="{{item.url}}" bindtap="redictDetail">
         <image mode="aspectFill" src="{{item.postThumbnail}}" style="width:100%" />
         <view class="swiper-mask"></view>
         <view class="swiper-desc">
@@ -30,14 +31,14 @@
 </view>
 <view style="display:{{showallDisplay}}">
   <view style="display:{{floatDisplay}}">
-    <form catchsubmit="formSubmit" catchreset="formReset" id="search-form">
+    <!-- <form catchsubmit="formSubmit" catchreset="formReset" id="search-form">
       <view class="search-pancel">
         <input value="" id="search-input" name="input" confirm-type="search" class="search-input" placeholder="搜索你感兴趣的内容..." bindconfirm="formSubmit"></input>
         <button class="search-button" form-type="submit" size="mini" plain="true">
           <icon type="search" color="#959595" size="12" />
         </button>
       </view>
-    </form>
+    </form> -->
     <!-- 图标导航 -->
     <!-- <view class="top-Nav">
       <block wx:for="{{categoriesList}}" wx:key="id">
@@ -62,7 +63,7 @@
                 </view>
     </view> -->
     <!-- 图标导航 -->
-    <view class='top-Nav2'>
+    <!-- <view class='top-Nav2'>
       <navigator url='../hot/hot' hover-class='none'>
         <view class="top-Nav2-item">
           <view class="top-Nav2-item-word">
@@ -77,11 +78,11 @@
           </view>
         </view>
       </navigator>
-    </view>
+    </view> -->
     <swiper class="swiper-categray" next-margin="100rpx" display-multiple-items="2">
       <block wx:for="{{categoriesList}}">
         <swiper-item class="swiper-item"  catchtap="redict" 
-        id="{{item.cateId}}" data-name="{{item.cateName}}" data-desc="{{item.cateDesc}}" data-redicttype="category">
+        id="{{item.cateId}}" data-name="{{item.cateName}}" data-desc="{{item.cateDesc}}" data-img="{{item.cateAppImgUrl}}" data-redicttype="category">
           <view >{{item.cateName}}</view>
           <image src="{{item.cateAppImgUrl}}" class="slide-image" width="355" height="100" />
         </swiper-item>
@@ -96,7 +97,7 @@
         <!-- <view hidden="{{isLastPage}}">
                     <button class="more-button" formType="submit" size="mini" bindtap="loadMore">加载更多...</button>
                 </view> -->
-        <view class="no-more" hidden="{{!isLastPage}}">---无更多文章---</view>
+        <view class="no-more" hidden="{{!isLastPage}}">---这是一个有底线的博客---</view>
       </view>
       <view class="copyright" style="display:{{floatDisplay}}">
         <template is="tempCopyright" />

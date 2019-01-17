@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+      "poster": "/dist/wxa/poster/index"
+    }
+}

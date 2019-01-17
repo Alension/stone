@@ -1,0 +1,8 @@
+<import src="app-card.wxml" />
+<template name="apps">
+    <view class="flex-2-item">
+        <view class="item" wx:for="{{apps}}">
+            <template is="app-card" data="{{item:item}}"></template>
+        </view>
+    </view>
+</template>

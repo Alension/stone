@@ -3,10 +3,17 @@ package cc.ryanc.halo.service.impl;
 import cc.ryanc.halo.model.domain.User;
 import cc.ryanc.halo.model.dto.Code2SessionResp;
 import cc.ryanc.halo.model.dto.JsonResult;
+import cc.ryanc.halo.model.dto.Site;
+import cc.ryanc.halo.model.enums.BlogPropertiesEnum;
+import cc.ryanc.halo.model.enums.MiniProgramPropertiesEnum;
+import cc.ryanc.halo.model.enums.PostStatusEnum;
+import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
 import cc.ryanc.halo.model.enums.TrueFalseEnum;
 import cc.ryanc.halo.model.request.UserR;
+import cc.ryanc.halo.repository.PostRepository;
 import cc.ryanc.halo.repository.UserRepository;
+import cc.ryanc.halo.service.OptionsService;
 import cc.ryanc.halo.service.UserService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +40,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OptionsService optionsService;
+
+    @Autowired
+    private PostRepository postRepository;
     /**
      * 保存个人资料
      *
@@ -150,8 +162,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JsonResult login(UserR userR) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=wx04a74b02846a8374&secret=a5869ecb19bb54673040bc8311a19d37&js_code="+userR.getJsCode()+"&grant_type=authorization_code";
+        final RestTemplate restTemplate = new RestTemplate();
+
+        final String urlFormat = MiniProgramPropertiesEnum.LOGIN_URL_FORMAT.getValue();
+        final String appId = optionsService.findOneOption(MiniProgramPropertiesEnum.APP_ID.getValue());
+        final String appSecret = optionsService.findOneOption(MiniProgramPropertiesEnum.APP_SECRET.getValue());
+
+        final String url = String.format(urlFormat, appId, appSecret,userR.getJsCode());
 
         final ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
         if (HttpStatus.OK.equals(entity.getStatusCode())){
@@ -176,5 +193,22 @@ public class UserServiceImpl implements UserService {
                     user);
         }
         return new JsonResult(ResponseStatusEnum.ERROR.getCode(), ResponseStatusEnum.ERROR.getMsg());
+    }
+
+    @Override
+    public JsonResult getSiteInfo() {
+        final Integer publishPostNum = postRepository
+                .countAllByPostStatusAndPostType(PostStatusEnum.PUBLISHED.getCode(),
+                        PostTypeEnum.POST_TYPE_POST.getDesc());
+
+        final Long viewsSum = postRepository.getPostViewsSum();
+
+        final Long likesSum = postRepository.getPostLikesSum();
+
+        Site site =  new Site();
+        site.setPublishPostNum(publishPostNum);
+        site.setViewNum(viewsSum);
+        site.setLikeNum(likesSum);
+        return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(),site);
     }
 }

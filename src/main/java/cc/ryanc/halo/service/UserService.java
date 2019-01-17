@@ -87,4 +87,6 @@ public interface UserService {
     User updateUserNormal();
 
     JsonResult login(UserR user);
+
+    JsonResult getSiteInfo();
 }

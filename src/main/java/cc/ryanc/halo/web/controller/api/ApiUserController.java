@@ -1,5 +1,6 @@
 package cc.ryanc.halo.web.controller.api;
 
+
 import cc.ryanc.halo.model.domain.User;
 import cc.ryanc.halo.model.dto.JsonResult;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
@@ -47,6 +48,10 @@ public class ApiUserController {
     }
 
 
+    @GetMapping("/siteInfo")
+    public JsonResult siteInfo() {
+        return userService.getSiteInfo();
+    }
 
 
 }

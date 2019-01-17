@@ -1,0 +1,8 @@
+<template name="app-card">
+    <view class="card"  catchtap="redict" id="{{item.id}}" data-id="{{item.id}}" data-redicttype="{{item.redirecttype}}" data-url="{{item.url}}" data-appid="{{item.appid}}" data-extraData="{{item.extraData}}">
+        <image class="" src="{{item.image}}"  lazy-load="true"/>
+        <view class="text">
+            {{item.name}}
+        </view>
+    </view>
+</template>

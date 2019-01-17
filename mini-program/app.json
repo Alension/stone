@@ -1,0 +1,71 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/detail/detail",
+        "pages/logs/logs",
+        "pages/page/page",
+        "pages/about/about",
+        "pages/list/list",
+        "pages/topic/topic",
+        "pages/readlog/readlog",
+        "pages/hot/hot",
+        "pages/pay/pay",
+        "pages/webpage/webpage",
+        "pages/comments/comments",
+        "pages/poster/poster",
+        "pages/test/test"
+
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#4ed588",
+        "navigationBarTitleText": "Alension",
+        "navigationBarTextStyle": "white",
+        "navigationStyle": "custom"
+    },
+    "tabBar": {
+        "color": "#9BABBA",
+        "selectedColor": "#495056",
+        "borderStyle": "white",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "images/tab-1.png",
+                "selectedIconPath": "images/tab-1-on.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/about/about",
+                "iconPath": "images/tab-2.png",
+                "selectedIconPath": "images/tab-2-on.png",
+                "text": "关于"
+            }
+			
+            
+        ]
+    },
+    "networkTimeout": {
+        "request": 10000,
+        "connectSocket": 10000,
+        "uploadFile": 10000,
+        "downloadFile": 10000
+    },
+    "navigateToMiniProgramAppIdList":
+    [
+         
+        "wxa43aaa8416cdbd61",
+        "wxe9440e3d24b04152",
+        "wx39075d0bde24f9f7",
+        "wxc1771b619b83316b",
+        "wx074a216a7aabc30c",
+        "wx55ea6098e41af5c4",
+        "wxab710632be50578a"
+    ],
+    "plugins": {
+        "wxparserPlugin": {
+            "version": "0.1.0",
+            "provider": "wx9d4d4ffa781ff3ac"
+        }
+    }
+}

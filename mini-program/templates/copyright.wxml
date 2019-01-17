@@ -1,0 +1,3 @@
+<template name="tempCopyright">
+<view>  © 2019  Alension    </view>
+</template>

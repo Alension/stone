@@ -19,7 +19,7 @@ import java.util.List;
  */
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/categories")
+@RequestMapping(value = "/api/category")
 public class ApiCategoryController {
 
     @Autowired
@@ -48,7 +48,7 @@ public class ApiCategoryController {
      *
      * @return JsonResult
      */
-    @GetMapping
+    @GetMapping("/")
     public JsonResult categories() {
         List<Category> categories = categoryService.findAll();
         if (null != categories && categories.size() > 0) {

@@ -109,4 +109,8 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> publishPosts = new ArrayList<>();
 }

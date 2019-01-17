@@ -256,4 +256,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> getPostsByLimit(@Param(value = "limit") int limit);
 
     List<Post> findPostsBySwiperView(boolean swiperView);
+
+    /**
+     * 获取所有文章点赞数总和
+     *
+     * @return Long
+     */
+    @Query(value = "SELECT count(*) FROM HALO_POSTS_LIKES ", nativeQuery = true)
+    Long getPostLikesSum();
 }

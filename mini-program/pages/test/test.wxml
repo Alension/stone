@@ -1,0 +1,6 @@
+<!--pages/test/test.wxml-->
+<view >
+    <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+      <button>点击生成海报</button>
+  </poster>
+</view>

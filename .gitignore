@@ -33,3 +33,9 @@ nbdist/
 ### VS Code ###
 *.project
 *.factorypath
+
+###vscode
+/mini-program/.vscode/
+
+# npm
+/mini-program/node_modules/

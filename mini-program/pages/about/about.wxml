@@ -1,0 +1,44 @@
+<!-- /*
+ * 
+ * author: jianbo
+ * organization: 守望轩  www.watch-life.net
+ * github:    https://github.com/iamxjb/winxin-app-watch-life.net
+ * 技术支持微信号：iamxjb
+ * 开源协议：MIT
+ * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ *
+ */ -->
+<import src="../../wxParse/wxParse.wxml" />
+<import src="../../templates/header.wxml" />
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/login-popup.wxml" />
+<import src="../../templates/apps/apps.wxml" />
+<view>
+    <image class="about-top-img" src="https://wx-lx-shop.oss-cn-beijing.aliyuncs.com/stone/timg%20%282%29.jpg" />
+    <image class="about-avatar-img" src="https://wx-lx-shop.oss-cn-beijing.aliyuncs.com/stone/timg%20%282%29.jpg" />
+    <view class="info">
+        <text class="ib birth">SA九五六一</text>
+        <text class="ib job">上海 | java工程师</text>
+        <view class="like-hot-view">
+            <image class="like-hot" bind:tap="copyLink" data-desc="github已复制" data-url="https://github.com/Alension/stone" src="/images/github.png" />
+            <image class="like-hot" bind:tap="copyLink"  data-desc="微信名已复制" data-url="lengxin1187290881" src="/images/wechat.png" />
+        </view>
+        <view class="num">
+            <text class="left">{{siteInfo.publishPostNum}}</text>
+            <text class="center">{{siteInfo.viewNum}}</text>
+            <text class="right">{{siteInfo.likeNum}}</text>
+        </view>
+        <view class="text">
+            <text class="left">创作</text>
+            <text class="center">浏览</text>
+            <text class="right">喜欢</text>
+        </view>
+        <view class="link">
+            <view class="link-info">
+                <view class="line"></view>
+                <text class="">更多小程序</text>
+            </view>
+            <template is="apps" data="{{apps:apps}}"></template>
+        </view>
+    </view>
+</view>

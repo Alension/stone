@@ -1,0 +1,5 @@
+<!-- 组件模板 -->
+<view class="nav">
+    <image class="image" bind:tap="go_home" src="/images/go_home.png" />
+    <image class="image"  bind:tap="go_top" src="/images/go_top.png" />
+</view>

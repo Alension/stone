@@ -2,6 +2,7 @@ package cc.ryanc.halo.web.controller.api;
 
 import static java.util.stream.Collectors.toList;
 
+import cc.ryanc.halo.model.domain.Category;
 import cc.ryanc.halo.model.domain.Comment;
 import cc.ryanc.halo.model.domain.Post;
 import cc.ryanc.halo.model.dto.HaloConst;
@@ -14,15 +15,18 @@ import cc.ryanc.halo.model.enums.PostTypeEnum;
 import cc.ryanc.halo.model.enums.ResponseStatusEnum;
 import cc.ryanc.halo.model.request.LikeR;
 import cc.ryanc.halo.model.request.UserR;
+import cc.ryanc.halo.service.CategoryService;
 import cc.ryanc.halo.service.PostService;
 import cc.ryanc.halo.utils.CommentUtil;
 import cn.hutool.core.util.StrUtil;
+import io.swagger.models.auth.In;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -41,20 +45,29 @@ public class ApiPostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     /**
      * 获取文章列表 分页
      * @param page 页码
      * @return JsonResult
      */
-    @GetMapping(value = "/page/{page}")
-    public JsonResult posts(@PathVariable(value = "page") Integer page) {
+    @GetMapping()
+    public JsonResult posts(Long cateId,
+            @RequestParam(defaultValue = "1") Integer page , @RequestParam(defaultValue = "10") Integer pageSize) {
         final Sort sort = new Sort(Sort.Direction.DESC, "postDate");
-        int size = 10;
-        if (StrUtil.isNotBlank(HaloConst.OPTIONS.get(BlogPropertiesEnum.INDEX_POSTS.getProp()))) {
-            size = Integer.parseInt(HaloConst.OPTIONS.get(BlogPropertiesEnum.INDEX_POSTS.getProp()));
+        final Pageable pageable = PageRequest.of(page - 1, pageSize, sort);
+        Page<Post> posts ;
+        if (StringUtils.isEmpty(cateId)){
+             posts = postService.findPostByStatus(PostStatusEnum.PUBLISHED.getCode(), PostTypeEnum.POST_TYPE_POST.getDesc(), pageable);
+        }else {
+            final Category category = categoryService.findByCateId(cateId).orElse(null);
+            if (category == null){
+                return new JsonResult(ResponseStatusEnum.EMPTY.getCode(), ResponseStatusEnum.EMPTY.getMsg());
+            }
+             posts = postService.findPostByCategories(category , pageable);
         }
-        final Pageable pageable = PageRequest.of(page - 1, size, sort);
-        final Page<Post> posts = postService.findPostByStatus(PostStatusEnum.PUBLISHED.getCode(), PostTypeEnum.POST_TYPE_POST.getDesc(), pageable);
         if (null == posts) {
             return new JsonResult(ResponseStatusEnum.EMPTY.getCode(), ResponseStatusEnum.EMPTY.getMsg());
         }

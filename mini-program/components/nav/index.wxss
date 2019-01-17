@@ -1,0 +1,11 @@
+.nav{
+    width: 60rpx;
+    position:fixed;
+    bottom:5%;
+    right:5%;
+}
+
+.image{
+    width: 60rpx;
+    height: 60rpx;
+}

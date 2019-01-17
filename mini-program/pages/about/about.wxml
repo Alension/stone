@@ -1,0 +1,38 @@
+<!-- /*
+ * 
+ * WordPres版微信小程序
+ * author: jianbo
+ * organization: 守望轩  www.watch-life.net
+ * github:    https://github.com/iamxjb/winxin-app-watch-life.net
+ * 技术支持微信号：iamxjb
+ * 开源协议：MIT
+ * Copyright (c) 2017 https://www.watch-life.net All rights reserved.
+ *
+ */ -->
+<import src="../../wxParse/wxParse.wxml" />
+<import src="../../templates/header.wxml" />
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/login-popup.wxml" />
+<import src="../../templates/apps/apps.wxml" />
+<view>
+    <image class="about-top-img" src="http://wx-lx-shop.oss-cn-beijing.aliyuncs.com/EABlog/about.png" />
+    <image class="about-avatar-img" src="http://wx-lx-shop.oss-cn-beijing.aliyuncs.com/EABlog/about.png" />
+    <view class="info">
+        <text class="ib birth">SA九五六一</text>
+        <text class="ib job">上海 | 全栈工程师</text>
+        <view class="like-hot-view">
+            <image class="like-hot" src="/images/about-like.png" />
+            <image class="like-hot" src="/images/about-hot.png" />
+        </view>
+        <view class="num">
+            <text class="left">96</text>
+            <text class="center">2345</text>
+            <text class="right">33</text>
+        </view>
+        <view class="text">
+            <text class="left">创作</text>
+            <text class="center">浏览</text>
+            <text class="right">关注</text>
+        </view>
+    </view>
+</view>

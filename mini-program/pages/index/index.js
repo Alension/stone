@@ -37,7 +37,8 @@ Page({
         floatDisplay: "none",
         displayfirstSwiper: "none",
         topNav: [],
-        categoriesList: []
+        categoriesList: [],
+        showNav: false
 
 
     },

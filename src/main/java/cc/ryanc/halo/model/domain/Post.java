@@ -106,7 +106,7 @@ public class Post implements Serializable {
     @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinTable(name = "halo_posts_likes",
             joinColumns = {@JoinColumn(name = "post_id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false)})
+            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false,unique = true)})
     private List<User> likeUsers = new ArrayList<>();
 
     /**

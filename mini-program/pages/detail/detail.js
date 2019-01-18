@@ -201,7 +201,7 @@ Page({
             var postLikeRequest = wxRequest.postRequest(url, data);
             postLikeRequest
                 .then(response => {
-                    if (response.data.status == '200') {
+                    if (response.data.code == '200') {
                         var _likeList = []
                         var _like = self.data.userInfo.avatarUrl;
                         _likeList.push(_like);
@@ -220,7 +220,7 @@ Page({
                             }
                         })
                     }
-                    else if (response.data.status == '501') {
+                    else if (response.data.code == '500') {
                         console.log(response.data.message);
                         wx.showToast({
                             title: '谢谢，已赞过',
@@ -265,31 +265,7 @@ Page({
             url: '../index/index'
         })
     },
-    praise: function () {
-        this.ShowHideMenu();
-        var self = this;
-        var minAppType = config.getMinAppType;
-        var system = self.data.system;
-        if (minAppType == "0" && system == 'Android') {
-            if (self.data.openid) {
 
-                wx.navigateTo({
-                    url: '../pay/pay?flag=1&openid=' + self.data.openid + '&postid=' + self.data.postID
-                })
-            }
-            else {
-                Auth.checkSession(self, 'isLoginNow');
-            }
-        }
-        else {
-
-            var src = config.getZanImageUrl;
-            wx.previewImage({
-                urls: [src],
-            });
-
-        }
-    },
 
 
     //获取文章内容
@@ -513,7 +489,6 @@ Page({
             });
 
         }
-        console.log('toFromId', toFromId);
         console.log('replay', isFocusing);
     },
     onReplyBlur: function (e) {
@@ -701,10 +676,10 @@ Page({
         //     title: "正在生成海报",
         //     mask: true,
         // });
-        var postid = self.data.detail.id;
-        var title = self.data.detail.title.rendered;
+        var postid = self.data.detail.postId;
+        var title = self.data.detail.postTitle;
         var path = "pages/detail/detail?id=" + postid;
-        var excerpt = util.removeHTML(self.data.detail.excerpt.rendered);
+        var excerpt = util.removeHTML(self.data.detail.postContent);
         var postImageUrl = "";
         var posterImagePath = "";
         var qrcodeImagePath = "";
@@ -713,7 +688,7 @@ Page({
         var domain = config.getDomain;
         var downloadFileDomain = config.getDownloadFileDomain;
 
-        var fristImage = self.data.detail.post_medium_image;
+        var fristImage = self.data.detail.postThumbnail;
 
         //获取文章首图临时地址，若没有就用默认的图片,如果图片不是request域名，使用本地图片
         if (fristImage) {
@@ -751,12 +726,10 @@ Page({
         };
         var url = Api.creatPoster();
         var qrcodeUrl = "";
-        var posterQrcodeUrl = Api.getPosterQrcodeUrl() + "qrcode-" + postid + ".png";
+        var posterQrcodeUrl = "https://wx-lx-shop.oss-cn-beijing.aliyuncs.com/stone/timg%20%282%29.jpg";
         //生成二维码
-        var creatPosterRequest = wxRequest.postRequest(url, data);
-        creatPosterRequest.then(response => {
-            if (response.statusCode == 200) {
-                if (response.data.status == '200') {
+       
+        
                     const downloadTaskQrcodeImage = wx.downloadFile({
                         url: posterQrcodeUrl,
                         success: res => {
@@ -816,33 +789,7 @@ Page({
                     downloadTaskQrcodeImage.onProgressUpdate((res) => {
                         console.log('下载二维码进度', res.progress)
                     })
-                }
-                else {
-                    console.log(response);
-                    //wx.hideLoading();
-                    flag = false;
-                    wx.showToast({
-                        title: "生成海报失败...",
-                        mask: true,
-                        duration: 2000
-                    });
-                    return false;
-                }
-            }
-            else {
-                console.log(response);
-                //wx.hideLoading();
-                flag = false;
-                wx.showToast({
-                    title: "生成海报失败...",
-                    mask: true,
-                    duration: 2000
-                });
-                return false;
-            }
-
-        });
-
+            
 
     },
     //将canvas转换为图片保存到本地，然后将路径传给image图片的src

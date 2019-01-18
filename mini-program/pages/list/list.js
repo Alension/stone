@@ -38,7 +38,8 @@ Page({
     displaySwiper: "block",
     floatDisplay: "none",
     searchKey: "",
-    categray:{}
+    categray:{},
+    showNav: false
   },
   formSubmit: function (e) {
     var url = '../list/list'

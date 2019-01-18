@@ -39,3 +39,4 @@ nbdist/
 
 # npm
 /mini-program/node_modules/
+/src/main/resources/www.alension.top.jks

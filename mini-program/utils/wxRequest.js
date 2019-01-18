@@ -9,6 +9,9 @@
  *  *Copyright (c) 2017 https://www.watch-life.net All rights reserved.
  * 
  */
+
+ import config from "./config";
+
 function wxPromisify(fn) {
     return function (obj = {}) {
         return new Promise((resolve, reject) => {
@@ -44,7 +47,8 @@ function getRequest(url, data) {
         method: 'GET',
         data: data,
         header: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'token': config.token
         }
     })
 }
@@ -61,7 +65,8 @@ function postRequest(url, data) {
         method: 'POST',
         data: data,
         header: {
-            "content-type": "application/json"
+            "content-type": "application/json",
+            'token': config.token
         },
     })
 }

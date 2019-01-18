@@ -6,8 +6,10 @@ import cc.ryanc.halo.model.domain.Tag;
 import cc.ryanc.halo.model.domain.User;
 import cc.ryanc.halo.model.dto.Archive;
 import cc.ryanc.halo.model.dto.HaloConst;
+import cc.ryanc.halo.model.dto.JsonResult;
 import cc.ryanc.halo.model.enums.PostStatusEnum;
 import cc.ryanc.halo.model.enums.PostTypeEnum;
+import cc.ryanc.halo.model.enums.ResponseStatusEnum;
 import cc.ryanc.halo.model.request.LikeR;
 import cc.ryanc.halo.repository.PostRepository;
 import cc.ryanc.halo.repository.UserRepository;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.util.CollectionUtils;
 
 /**
  * <pre>
@@ -531,12 +534,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void likePost(LikeR likeR) {
+    public JsonResult likePost(LikeR likeR) {
         final Post post = findByPostId(likeR.getPostId()).orElseThrow(NullPointerException::new);
         final User user = userRepository.findByOpenid(likeR.getOpenid());
         final List<User> likeUsers = post.getLikeUsers();
-        likeUsers.add(user);
-        post.setLikeUsers(likeUsers);
-        postRepository.save(post);
+        if (!CollectionUtils.isEmpty(likeUsers) && likeUsers.contains(user)){
+            return new JsonResult(ResponseStatusEnum.ERROR.getCode());
+        }else {
+            likeUsers.add(user);
+            post.setLikeUsers(likeUsers);
+            postRepository.save(post);
+            return new JsonResult(ResponseStatusEnum.SUCCESS.getCode());
+        }
+
     }
 }

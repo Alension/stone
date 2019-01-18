@@ -1,5 +1,13 @@
 server:
-  port: 8090
+
+  port: 443
+  ssl:
+    enabled: true
+    key-store: classpath:www.alension.top.jks
+    key-store-password: x8g58pllz0c5y
+    key-store-type: JKS
+
+
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -16,8 +24,8 @@ spring:
     # H2database 配置
     driver-class-name: org.h2.Driver
     url: jdbc:h2:file:~/halo/halo
-    username: admin
-    password: 123456
+    username: alen
+    password: dandan5920
 
 
 

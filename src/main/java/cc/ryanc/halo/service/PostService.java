@@ -4,6 +4,7 @@ import cc.ryanc.halo.model.domain.Category;
 import cc.ryanc.halo.model.domain.Post;
 import cc.ryanc.halo.model.domain.Tag;
 import cc.ryanc.halo.model.dto.Archive;
+import cc.ryanc.halo.model.dto.JsonResult;
 import cc.ryanc.halo.model.request.LikeR;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -300,5 +301,5 @@ public interface PostService {
 
     List<Post> getSwiperPosts();
 
-    void likePost(LikeR likeR);
+    JsonResult likePost(LikeR likeR);
 }

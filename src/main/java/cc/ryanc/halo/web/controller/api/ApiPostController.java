@@ -102,8 +102,7 @@ public class ApiPostController {
 
     @PostMapping(value = "/like")
     public JsonResult likePost(@RequestBody LikeR likeR) {
-        postService.likePost(likeR);
-        return new JsonResult(ResponseStatusEnum.SUCCESS.getCode(), ResponseStatusEnum.SUCCESS.getMsg());
+        return postService.likePost(likeR);
     }
 
 }

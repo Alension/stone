@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -11,7 +11,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
-	"appid": "wx04a74b02846a8374",
+	"appid": "wx936bf01da66814f0",
 	"projectname": "Alension",
 	"condition": {
 		"search": {

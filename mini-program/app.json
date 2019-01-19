@@ -59,11 +59,6 @@
         "wx074a216a7aabc30c",
         "wx55ea6098e41af5c4",
         "wxab710632be50578a"
-    ],
-    "plugins": {
-        "wxparserPlugin": {
-            "version": "0.1.0",
-            "provider": "wx9d4d4ffa781ff3ac"
-        }
-    }
+    ]
+  
 }

@@ -58,8 +58,8 @@
                 <text>{{likeCount}}人已赞</text>
             </view>
             <view class="likeText">
-                <block wx:key="id" wx:for="{{likeUsers}}">
-                    <image src="{{item.userAvatar}}" class="gravatarLikeImg"></image>
+                <block wx:key="id" wx:for="{{likeList}}">
+                    <image src="{{item}}" class="gravatarLikeImg"></image>
                 </block>
             </view>
         </view>

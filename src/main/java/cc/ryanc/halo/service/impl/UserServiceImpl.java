@@ -16,6 +16,7 @@ import cc.ryanc.halo.repository.UserRepository;
 import cc.ryanc.halo.service.OptionsService;
 import cc.ryanc.halo.service.UserService;
 import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ import org.springframework.web.client.RestTemplate;
  * @date : 2017/11/14
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -176,7 +178,13 @@ public class UserServiceImpl implements UserService {
             Gson gson = new Gson();
             final Code2SessionResp resp = gson.fromJson(body, Code2SessionResp.class);
 
+            log.info("mini program request openid resp:[{}]",gson.toJson(resp));
+
             final String openid = resp.getOpenid();
+
+            if (StringUtils.isEmpty(openid)){
+                return new JsonResult(ResponseStatusEnum.ERROR.getCode(), ResponseStatusEnum.ERROR.getMsg());
+            }
 
             User user = userRepository.findByOpenid(openid);
             //没有用户记录则新建一个用户

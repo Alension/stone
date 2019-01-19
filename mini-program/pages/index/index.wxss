@@ -221,14 +221,14 @@ font-weight: 500;
 
 .swiper-item view{
   position:absolute;
-  width:100rpx;
+  width:200rpx;
   font-size:40rpx;
   margin:0 auto;
   text-align:center;
   color:#ffffff;
   border-radius:10rpx;
   left:50%;
-  margin-left:-40rpx;
+  margin-left:-90rpx;
   height:100rpx;
   border-radius:10rpx;
   display:inline-block;

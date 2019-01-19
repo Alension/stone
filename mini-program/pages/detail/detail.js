@@ -110,15 +110,15 @@ Page({
     showLikeImg: function () {
         var self = this;
         var flag = false;
-        var likeUsers = self.data.detail.likeUsers;
+        var likeList = self.data.detail.likeUsers.map(likeUser => likeUser.userAvatar)
 
-        for (var i = 0; i < likeUsers.length; i++) {
-            if (likeUsers[i].userAvatar.indexOf('wx.qlogo.cn') == -1) {
-                likeUsers[i].userAvatar = "../../images/gravatar.png";
+        for (var i = 0; i < likeList.length; i++) {
+            if (likeList[i].indexOf('wx.qlogo.cn') == -1) {
+                likeList[i] = "../../images/gravatar.png";
             }
         }
         self.setData({
-            likeUsers: likeUsers
+            likeList: likeList
         });
     },
     onReachBottom: function () {
@@ -726,7 +726,7 @@ Page({
         };
         var url = Api.creatPoster();
         var qrcodeUrl = "";
-        var posterQrcodeUrl = "https://wx-lx-shop.oss-cn-beijing.aliyuncs.com/stone/timg%20%282%29.jpg";
+        var posterQrcodeUrl = config.posertQrCode;
         //生成二维码
        
         

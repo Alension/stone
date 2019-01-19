@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "wxparser": "plugin://wxparserPlugin/wxparser",
     "nav": "/components/nav/index"
 }
 }

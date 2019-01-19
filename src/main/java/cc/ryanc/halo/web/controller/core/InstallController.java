@@ -118,6 +118,7 @@ public class InstallController {
             user.setUserDisplayName(userDisplayName);
             user.setUserEmail(userEmail);
             user.setUserPass(SecureUtil.md5(userPwd));
+            user.setUserAvatar("https://secure.gravatar.com/avatar/add969ca6d6b0cf43c62d4a3227f64e6");
             userService.save(user);
 
             //默认分类
@@ -127,33 +128,48 @@ public class InstallController {
             category.setCateDesc("未分类");
             categoryService.save(category);
 
+            final Category category2 = new Category();
+            category.setCateName("java");
+            category.setCateUrl("default");
+            category.setCateDesc("java");
+            categoryService.save(category2);
+
+            final Category category3 = new Category();
+            category.setCateName("小程序");
+            category.setCateUrl("mini-program");
+            category.setCateDesc("小程序");
+            categoryService.save(category3);
+
             //第一篇文章
             final Post post = new Post();
             final List<Category> categories = new ArrayList<>();
             categories.add(category);
             post.setPostTitle("Hello Halo!");
             post.setPostContentMd("# Hello Halo!\n" +
-                    "欢迎使用Halo进行创作，删除这篇文章后赶紧开始吧。");
+                    "欢迎使用Halo进行创作，删除这篇文章后赶紧开始吧。\n\n\n\n\n\n");
             post.setPostContent(MarkdownUtils.renderMarkdown(post.getPostContentMd()));
-            post.setPostSummary("欢迎使用Halo进行创作，删除这篇文章后赶紧开始吧。");
+            post.setPostSummary("欢迎使用Halo进行创作，删除这篇文章后赶紧开始吧。\n\n\n\n\n\n");
             post.setPostStatus(0);
             post.setPostDate(DateUtil.date());
             post.setPostUrl("hello-halo");
             post.setUser(user);
             post.setCategories(categories);
             post.setAllowComment(AllowCommentEnum.ALLOW.getCode());
+            post.setSwiperView(true);
             postService.save(post);
 
             //第一个评论
             final Comment comment = new Comment();
             comment.setPost(post);
-            comment.setCommentAuthor("ruibaby");
-            comment.setCommentAuthorEmail("i@ryanc.cc");
-            comment.setCommentAuthorUrl("https://ryanc.cc");
+            comment.setUser(user);
+            comment.setCommentAuthor(userName);
+            comment.setCommentAuthorEmail("1187290881@qq.com");
+            comment.setCommentAuthorUrl("https://alension.top");
             comment.setCommentAuthorIp("127.0.0.1");
             comment.setCommentAuthorAvatarMd5(SecureUtil.md5("i@ryanc.cc"));
             comment.setCommentDate(DateUtil.date());
             comment.setCommentContent("欢迎，欢迎！");
+            comment.setCommentContentText("欢迎，欢迎！");
             comment.setCommentStatus(0);
             comment.setCommentAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36");
             comment.setIsAdmin(0);

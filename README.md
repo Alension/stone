@@ -1,13 +1,8 @@
-![](https://i.loli.net/2018/12/21/5c1cd34849751.png)
-
-> Halo 可能是最好的 Java 博客系统。
+> stone 一个集成了小程序的cms博客系统
 
 <p align="center">
-<a href="https://ryanc.cc"><img alt="Author" src="https://img.shields.io/badge/author-ruibaby-red.svg?style=flat-square"/></a>
+<a href="https://alension.top"><img alt="Author" src="https://img.shields.io/badge/author-ruibaby-red.svg?style=flat-square"/></a>
 <a href="#"><img alt="JDK" src="https://img.shields.io/badge/JDK-1.8-yellow.svg?style=flat-square"/></a>
-<a href="https://github.com/ruibaby/halo/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/ruibaby/halo.svg?style=flat-square"/></a>
-<a href="https://travis-ci.org/ruibaby/halo"><img alt="Travis CI" src="https://img.shields.io/travis/ruibaby/halo.svg?style=flat-square"/></a>
-<a href="https://hub.docker.com/r/ruibaby/halo/"><img alt="Docker Build Status" src="https://img.shields.io/docker/build/ruibaby/halo.svg?style=flat-square"/></a>
 </p>
 
 ------------------------------
@@ -15,15 +10,16 @@
 
 ## 简介
 
-**Halo** [ˈheɪloʊ]，意为光环。当然，你也可以当成拼音读(哈喽)。
+该系统的诞生的是为了想要写博客同时更新到微信小程序，当然后续可能会扩展更多功能。 
+如果您只想搭建一个博客系统，那推荐您使用<a href="https://github.com/ruibaby/halo">halo</a>就能满足您的需求，该系统也是使用halo搭建
 
 轻快，简洁，功能强大，使用 Java 开发的博客系统。
 
-> QQ 交流群: 162747721 | Telegram 交流群：[https://t.me/HaloBlog](https://t.me/HaloBlog) | [WeHalo 小程序](https://github.com/aquanlerou/WeHalo)。
 
-## 演示站点
 
-> 前台地址：[https://demo.halo.run](https://demo.halo.run) 
+## 小程序演示
+
+> 前台地址：![](https://github.com/Alension/stone/blob/master/mini-program/images/gh_140ab523e0a5_258%20(2).jpg)
 > 后台地址：[https://demo.halo.run/admin](https://demo.halo.run/admin)
 > 用户名：admin，密码：123456
 
@@ -134,7 +130,7 @@ Halo 的诞生离不开下面这些项目：
 
 ## 界面展示
 
-![](https://i.loli.net/2018/12/16/5c15b6edb9a49.png)
+![](https://github.com/Alension/stone/blob/master/mini-program/images/gh_140ab523e0a5_258%20(2).jpg)
 ![](https://i.loli.net/2018/12/16/5c15b6ee08333.png)
 ![](https://i.loli.net/2018/12/16/5c15b6ec853af.png)
 ![](https://i.loli.net/2018/12/16/5c15b6ec50238.png)

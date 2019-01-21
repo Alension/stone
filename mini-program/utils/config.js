@@ -14,7 +14,7 @@
 //配置域名,域名只修改此处。
 var DOMAIN = "https://alension.top";
 //API token
-const token = "3f85d4962655a5bfb8141632762abf8d"
+const TOKEN = "3f85d4962655a5bfb8141632762abf8d"
 //小程序的类型，如果是企业小程序请填：0 ，如果是个人小程序请填：1
 var MINAPPTYPE = "1";
 //网站名称
@@ -229,6 +229,6 @@ export default {
   getDownloadFileDomain: DOWNLOADFILEDOMAIN,
   getApps: APPS,
   getPosterTemplate: POSTERTEMPLATE,
-  token:token,
+  token: TOKEN,
   posertQrCode: POSTERQRCODE
 }

@@ -851,14 +851,14 @@
                     <label for="app_id" class="col-lg-2 col-sm-4 control-label">AppID</label>
                     <div class="input-group col-lg-3 col-sm-6 ">
                       <input type="text" class="form-control" id="app_id" name="app_id"
-                             value="${options.appID!}">
+                             value="${options.app_id!}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="app_secret" class="col-lg-2 col-sm-4 control-label">AppSecret</label>
                     <div class="input-group col-lg-3 col-sm-6">
                       <input type="text" class="form-control" id="app_secret" name="app_secret"
-                             value="${options.appSecret!}">
+                             value="${options.app_secret!}">
                     </div>
                   </div>
                 </div>

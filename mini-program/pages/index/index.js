@@ -71,7 +71,7 @@ Page({
     },
     onShareAppMessage: function () {
         return {
-            title: '' + config.getWebsiteName + ' 一个专注于分享互联网优惠信息 薅羊毛的程序',
+            title: '' + config.getWebsiteName + '技术分享',
             path: 'pages/index/index',
             success: function (res) {
                 // 转发成功

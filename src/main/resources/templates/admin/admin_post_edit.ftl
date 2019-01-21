@@ -160,7 +160,7 @@
 </div>
 <@footer>
 <script type="application/javascript" id="footer_script">
-
+  
     $('#postDate').datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',
@@ -190,13 +190,13 @@
         renderingConfig: {
             codeSyntaxHighlighting: true
         },
-        previewRender: function(plainText) {
-            var preview = document.getElementsByClassName("editor-preview-side")[0];
-            preview.innerHTML = this.parent.markdown(plainText);
-            preview.setAttribute('id','editor-preview');
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub,"editor-preview"]);
-            return preview.innerHTML;
-        },
+        // previewRender: function(plainText) {
+        //     var preview = document.getElementsByClassName("editor-preview-side")[0];
+        //     preview.innerHTML = this.parent.markdown(plainText);
+        //     preview.setAttribute('id','editor-preview');
+        //     MathJax.Hub.Queue(["Typeset",MathJax.Hub,"editor-preview"]);
+        //     return preview.innerHTML;
+        // },
         showIcons: ["code", "table"],
         status: ["autosave", "lines", "words"],
         tabSize: 4

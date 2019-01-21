@@ -160,7 +160,7 @@
 </div>
 <@footer>
 <script type="application/javascript" id="footer_script">
-  debugger
+  
     $('#postDate').datetimepicker({
         format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',

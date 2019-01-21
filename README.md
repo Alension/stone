@@ -34,7 +34,7 @@ mini-program是该项目的小程序端，分别将java工程和mini-program导�
 ![](https://github.com/Alension/stone/blob/master/mini-program/images/gh_140ab523e0a5_258%20(2).jpg)
 
 ## 说明
-如果您只想搭建一个博客系统，那推荐您使用<a href="https://github.com/ruibaby/halo">halo</a>就能满足您的需求，该系统也是使用halo搭建。此外，该项目的小程序端是基于<a href="https://github.com/iamxjb/winxin-app-watch-life.net">守望轩</a>项目修改
+如果您只想搭建一个博客系统，那推荐您使用<a href="https://github.com/ruibaby/halo">halo</a>就能满足您的需求，该系统也是使用halo扩展。此外，该项目的小程序端是基于<a href="https://github.com/iamxjb/winxin-app-watch-life.net">守望轩</a>项目修改
 
 
 

@@ -1,4 +1,4 @@
-> stone 一个集成了小程序的cms博客系统
+> stone 一个集成了小程序的java cms博客系统
 
 <p align="center">
 <a href="#"><img alt="JDK" src="https://img.shields.io/badge/JDK-1.8-yellow.svg?style=flat-square"/></a>

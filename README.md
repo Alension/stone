@@ -36,9 +36,9 @@ mini-program是该项目的小程序端，分别将java工程和mini-program导�
 ![](https://github.com/Alension/stone/blob/master/mini-program/images/gh_140ab523e0a5_258%20(2).jpg)
 
 #### 部分页面
-![](https://github.com/Alension/stone/blob/master/src/main/resources/static/halo-backend/images/IMG_0814.PNG)
-![](https://github.com/Alension/stone/blob/master/src/main/resources/static/halo-backend/images/IMG_0815.PNG)
-![](https://github.com/Alension/stone/blob/master/src/main/resources/static/halo-backend/images/IMG_0816.PNG)
+<img src="https://github.com/Alension/stone/blob/master/src/main/resources/static/halo-backend/images/IMG_0814.PNG" width="500" hegiht="313"  />
+<img src="https://github.com/Alension/stone/blob/master/src/main/resources/static/halo-backend/images/IMG_0815.PNG" width="500" hegiht="313"  />
+<img src="https://github.com/Alension/stone/blob/master/src/main/resources/static/halo-backend/images/IMG_0816.PNG" width="500" hegiht="313" r />
 
 
 

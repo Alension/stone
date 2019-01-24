@@ -11,11 +11,14 @@
 该系统的诞生的是为了想要写博客同时更新到微信小程序，当然后续会扩展更多功能。 
 
 ## 快速上手
-mini-program是该项目的小程序端，分别将java工程和mini-program导入java IDE和微信开发者工具
 
 `
 git clone https://github.com/Alension/stone.git
 `
+
+mini-program是该项目的小程序端，分别将java工程和mini-program导入java IDE和微信开发者工具
+
+
 ### 后端设置
 安装后 设置->博客设置
 

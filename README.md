@@ -1,4 +1,4 @@
-> stone 一个集成了小程序的java cms博客系统
+> stone 一个集成了小程序的java springboot博客系统
 
 <p align="center">
 <a href="#"><img alt="JDK" src="https://img.shields.io/badge/JDK-1.8-yellow.svg?style=flat-square"/></a>
@@ -13,7 +13,10 @@
 ## 快速上手
 mini-program是该项目的小程序端，分别将java工程和mini-program导入java IDE和微信开发者工具
 
-### 后端
+`
+git clone https://github.com/Alension/stone.git
+`
+### 后端设置
 安装后 设置->博客设置
 
 * 其它设置
@@ -23,7 +26,7 @@ mini-program是该项目的小程序端，分别将java工程和mini-program导�
   * AppID(非必需，用于点赞评论功能)
   * AppSecret(非必需，用于点赞评论功能)
 
-### 小程序端
+### 小程序端设置
 修改mini-program中的utils下的config.js的配置项
 * DOMAIN TOKEN(必须)
 * TOKEN(推荐，填写后端设置的token)
@@ -33,7 +36,7 @@ mini-program是该项目的小程序端，分别将java工程和mini-program导�
 
 ![](https://github.com/Alension/stone/blob/master/mini-program/images/gh_140ab523e0a5_258%20(2).jpg)
 
-## 说明
+## 感谢
 如果您只想搭建一个博客系统，那推荐您使用<a href="https://github.com/ruibaby/halo">halo</a>就能满足您的需求，该系统也是使用halo扩展。此外，该项目的小程序端是基于<a href="https://github.com/iamxjb/winxin-app-watch-life.net">守望轩</a>项目修改
 
 
